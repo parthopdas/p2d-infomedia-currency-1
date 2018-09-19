@@ -23,8 +23,9 @@ var HaveIBeenPwned;
             });
         };
         return EnterKeyPressDirective;
-    })();
+    }());
     angular
         .module("HaveIBeenPwned")
         .directive("ngEnter", EnterKeyPressDirective.instance);
 })(HaveIBeenPwned || (HaveIBeenPwned = {}));
+//# sourceMappingURL=search.directive.js.map

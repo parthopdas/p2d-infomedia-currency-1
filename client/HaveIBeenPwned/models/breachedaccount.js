@@ -6,6 +6,7 @@ var HaveIBeenPwned;
         function BreachedAccount() {
         }
         return BreachedAccount;
-    })();
+    }());
     HaveIBeenPwned.BreachedAccount = BreachedAccount;
 })(HaveIBeenPwned || (HaveIBeenPwned = {}));
+//# sourceMappingURL=breachedaccount.js.map
