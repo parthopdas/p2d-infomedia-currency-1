@@ -3,25 +3,32 @@
 /// <reference path="../../../bower_components/currency.js/src/currency.d.ts" />
 
 namespace HaveIBeenPwned {
+
+  declare type RoundingFn = (v: number) => number;
+
   class SearchController {
+
+    private noRoundingType: [string, RoundingFn] = ["No Rounding", v => v];
+    private roundingTypes: [string, RoundingFn][]= [
+      [ "Standard Rounding", Math.round ],
+      [ "Round Up", Math.ceil ],
+      [ "Round Down", Math.floor ],
+    ];
+
     private currencyOptions: { [name: string]: currency.Options } = {
-      USD: { precision: 2, symbol: "$", decimal: ".", separator: "," },
-      YEN: { precision: 0, symbol: "¥", decimal: ".", separator: "," },
-      EUR: { precision: 2, symbol: "€", decimal: ",", separator: "." },
+      USD: { precision: 2, symbol: "$", decimal: ".", separator: ",", increment: 0.05 },
+      YEN: { precision: 0, symbol: "¥", decimal: ".", separator: ",", increment: 0.5 },
+      EUR: { precision: 2, symbol: "€", decimal: ",", separator: ".", increment: 0.05 },
     };
 
-    private selectedCurrency: currency.Options;
+    private selectedCurrency: currency.Options = this.currencyOptions.YEN;
+    private selectedRoundingType: [string, RoundingFn] = this.roundingTypes[0];
 
-    private amount1: number = 0.12;
+    private amount1: number = 5.00;
     private amount2: number = 0.21;
 
-    static $inject = ["PwnedService"];
-    constructor(private pwnedService: IPwnedService) {
-      this.selectedCurrency = this.currencyOptions.USD;
-    }
-
-    naiveAddition(amount1: number, amount2: number): string {
-      return this.selectedCurrency.symbol + (amount1 + amount2);
+    naiveAddition(amount1: number, amount2: number, roundingFun: RoundingFn): string {
+      return this.selectedCurrency.symbol + roundingFun(amount1 + amount2);
     }
 
     currencyAddition(amount1: number, amount2: number): string {
