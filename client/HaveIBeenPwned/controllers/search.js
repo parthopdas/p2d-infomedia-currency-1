@@ -6,21 +6,22 @@ var HaveIBeenPwned;
     var SearchController = (function () {
         function SearchController(pwnedService) {
             this.pwnedService = pwnedService;
-            this.USD = function (value) { return currency(value); };
-            this.JPY = function (value) { return currency(value, { precision: 0, symbol: "¥" }); };
-            this.EURO = function (value) { return currency(value, { symbol: "€", decimal: ",", separator: "." }); };
-            this.usd = this.USD(1234.567).format(true); // => "$1,234.57"
-            this.jpy = this.JPY(1234.567).format(true); // => "¥1,235"
-            this.euro = this.EURO(1234.567).format(true); // => "€1.234,57"
-            this.emailAddress = "foo@bar.com";
+            this.currencyOptions = {
+                USD: { precision: 2, symbol: "$", decimal: ".", separator: "," },
+                YEN: { precision: 0, symbol: "¥", decimal: ".", separator: "," },
+                EUR: { precision: 2, symbol: "€", decimal: ",", separator: "." },
+            };
+            this.amount1 = 0.12;
+            this.amount2 = 0.21;
+            this.selectedCurrency = this.currencyOptions.USD;
         }
-        SearchController.prototype.submit = function (address) {
+        SearchController.prototype.naiveAddition = function (amount1, amount2) {
+            return this.selectedCurrency.symbol + (amount1 + amount2);
+        };
+        SearchController.prototype.currencyAddition = function (amount1, amount2) {
             var _this = this;
-            this.pwnedService
-                .check(address)
-                .then(function (result) {
-                _this.breachedAccounts = result.data;
-            });
+            var fn = function (v) { return currency(v, _this.selectedCurrency); };
+            return fn(amount1).add(amount2).format(true);
         };
         return SearchController;
     }());
