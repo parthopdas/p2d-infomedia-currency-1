@@ -25,7 +25,7 @@ var HaveIBeenPwned;
         SearchController.prototype.naiveCalculation = function (amount1, amount2, roundingFun) {
             var sum = amount1 + amount2;
             var discount = sum * this.discount / 100;
-            return this.selectedCurrency.symbol + roundingFun(sum - discount);
+            return roundingFun(sum - discount);
         };
         SearchController.prototype.currencyCalculation = function (amount1, amount2) {
             var _this = this;

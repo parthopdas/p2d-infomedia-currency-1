@@ -28,10 +28,10 @@ namespace HaveIBeenPwned {
     private amount2: number = 0.21;
     private discount: number = 10;
 
-    naiveCalculation(amount1: number, amount2: number, roundingFun: RoundingFn): string {
+    naiveCalculation(amount1: number, amount2: number, roundingFun: RoundingFn): number {
       const sum: number = amount1 + amount2;
       const discount: number = sum * this.discount / 100;
-      return this.selectedCurrency.symbol + roundingFun(sum - discount);
+      return roundingFun(sum - discount);
     }
 
     currencyCalculation(amount1: number, amount2: number): string {
