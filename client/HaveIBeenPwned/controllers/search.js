@@ -6,16 +6,16 @@ var HaveIBeenPwned;
     var SearchController = (function () {
         function SearchController(pwnedService) {
             this.pwnedService = pwnedService;
+            this.USD = function (value) { return currency(value); };
+            this.JPY = function (value) { return currency(value, { precision: 0, symbol: "¥" }); };
+            this.EURO = function (value) { return currency(value, { symbol: "€", decimal: ",", separator: "." }); };
+            this.usd = this.USD(1234.567).format(true); // => "$1,234.57"
+            this.jpy = this.JPY(1234.567).format(true); // => "¥1,235"
+            this.euro = this.EURO(1234.567).format(true); // => "€1.234,57"
             this.emailAddress = "foo@bar.com";
         }
         SearchController.prototype.submit = function (address) {
             var _this = this;
-            var USD = function (value) { return currency(value); };
-            var JPY = function (value) { return currency(value, { precision: 0, symbol: "¥" }); };
-            var EURO = function (value) { return currency(value, { symbol: "€", decimal: ",", separator: "." }); };
-            alert(USD(1234.567).format(true)); // => "$1,234.57"
-            alert(JPY(1234.567).format(true)); // => "¥1,235"
-            alert(EURO(1234.567).format(true)); // => "€1.234,57"
             this.pwnedService
                 .check(address)
                 .then(function (result) {

@@ -1,24 +1,25 @@
 <html>
 	<head>
-		<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 		<link href="content/css/site.css" rel="stylesheet"/>
 	</head>
 	<body ng-app="HaveIBeenPwned">
-		<h1>Have I Been Pwned?</h1>
-		
+		<h1>[Infomedia] Prototype for currency manipulation</h1>
+
 		<div class="container" ng-view>
-			
+
 		</div>
-		
+
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-route.js"></script>
-		
+		<script src="https://unpkg.com/currency.js@1.1.4/dist/currency.min.js"></script>
+
 		<script src="client/HaveIBeenPwned/app.module.js"></script>
 		<script src="client/HaveIBeenPwned/app.route.js"></script>
 		<script src="client/HaveIBeenPwned/services/pwnedservice.js"></script>
 		<script src="client/HaveIBeenPwned/controllers/search.js"></script>
-		<script src="client/HaveIBeenPwned/models/breachedaccount.js"></script>		
-		<script src="client/HaveIBeenPwned/filters/asHtml.filter.js"></script>	
-		<script src="client/HaveIBeenPwned/directives/search.directive.js"></script>	
+		<script src="client/HaveIBeenPwned/models/breachedaccount.js"></script>
+		<script src="client/HaveIBeenPwned/filters/asHtml.filter.js"></script>
+		<script src="client/HaveIBeenPwned/directives/search.directive.js"></script>
 	</body>
 </html>

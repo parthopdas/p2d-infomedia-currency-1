@@ -1,8 +1,9 @@
 {
-    "name": "p2d-infomedia-currency-1",
-    "version": "1.0.0",
-    "dependencies": {
-        "angular": "~1.4.0",
-        "angular-route": "~1.4.0"
-    }
+  "name": "p2d-infomedia-currency-1",
+  "version": "1.0.0",
+  "dependencies": {
+    "angular": "~1.4.0",
+    "angular-route": "~1.4.0",
+    "currency.js": "^1.1.4"
+  }
 }
