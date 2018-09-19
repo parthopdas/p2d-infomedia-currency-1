@@ -20,14 +20,19 @@ var HaveIBeenPwned;
             this.selectedRoundingType = this.roundingTypes[0];
             this.amount1 = 5.00;
             this.amount2 = 0.21;
+            this.discount = 10;
         }
-        SearchController.prototype.naiveAddition = function (amount1, amount2, roundingFun) {
-            return this.selectedCurrency.symbol + roundingFun(amount1 + amount2);
+        SearchController.prototype.naiveCalculation = function (amount1, amount2, roundingFun) {
+            var sum = amount1 + amount2;
+            var discount = sum * this.discount / 100;
+            return this.selectedCurrency.symbol + roundingFun(sum - discount);
         };
-        SearchController.prototype.currencyAddition = function (amount1, amount2) {
+        SearchController.prototype.currencyCalculation = function (amount1, amount2) {
             var _this = this;
             var fn = function (v) { return currency(v, _this.selectedCurrency); };
-            return fn(amount1).add(amount2).format(true);
+            var sum = fn(amount1).add(amount2);
+            var discount = sum.multiply(this.discount).divide(100);
+            return sum.subtract(discount).format();
         };
         return SearchController;
     }());

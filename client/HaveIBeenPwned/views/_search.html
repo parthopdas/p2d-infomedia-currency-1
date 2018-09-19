@@ -1,6 +1,6 @@
 <div class="mt-5">
   <div class="form-group row">
-    <label for="currency" class="col-sm-2">Amount 1</label>
+    <label for="currency" class="col-sm-2">Currency</label>
     <div class="col-sm-4">
       <select class="form-control" id="currency" ng-options="n for (n, o) in vm.currencyOptions" ng-model="vm.selectedCurrency"></select>
     </div>
@@ -28,33 +28,25 @@
   </div>
 
   <div class="form-group row">
-    <label for="sum" class="col-sm-2">Naive addition</label>
+    <label for="discount" class="col-sm-2">Discount %</label>
     <div class="col-sm-4">
       <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Without rounding</span>
+        <input type="number" class="form-control" id="discount" placeholder="Amount 2" ng-model="vm.discount">
+        <div class="input-group-append">
+          <span class="input-group-text">%</span>
         </div>
-        <span class="form-control" id="sum">{{ vm.naiveAddition(vm.amount1, vm.amount2, vm.noRoundingType[1]) }}</span>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">With rounding</span>
-        </div>
-        <span class="form-control" id="sum">{{ vm.naiveAddition(vm.amount1, vm.amount2, vm.selectedRoundingType[1]) }}</span>
       </div>
     </div>
   </div>
 
   <div class="form-group row">
-    <label for="sum" class="col-sm-2">Currency addition</label>
+    <label for="sum" class="col-sm-2">Naive total (after discount)</label>
     <div class="col-sm-4">
       <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text">Without rounding</span>
         </div>
-        <span class="form-control" id="sum">{{ vm.currencyAddition(vm.amount1, vm.amount2) }}</span>
+        <span class="form-control" id="sum">{{ vm.naiveCalculation(vm.amount1, vm.amount2, vm.noRoundingType[1]) }}</span>
       </div>
     </div>
     <div class="col-sm-4">
@@ -62,7 +54,27 @@
         <div class="input-group-prepend">
           <span class="input-group-text">With rounding</span>
         </div>
-        <span class="form-control" id="sum">{{ vm.currencyAddition(vm.amount1, vm.amount2) }}</span>
+        <span class="form-control" id="sum">{{ vm.naiveCalculation(vm.amount1, vm.amount2, vm.selectedRoundingType[1]) }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="sum" class="col-sm-2">Currency total (after discount)</label>
+    <div class="col-sm-4">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Without rounding</span>
+        </div>
+        <span class="form-control" id="sum">{{ vm.currencyCalculation(vm.amount1, vm.amount2) }}</span>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">With rounding</span>
+        </div>
+        <span class="form-control" id="sum">{{ vm.currencyCalculation(vm.amount1, vm.amount2) }}</span>
       </div>
     </div>
   </div>

@@ -26,14 +26,20 @@ namespace HaveIBeenPwned {
 
     private amount1: number = 5.00;
     private amount2: number = 0.21;
+    private discount: number = 10;
 
-    naiveAddition(amount1: number, amount2: number, roundingFun: RoundingFn): string {
-      return this.selectedCurrency.symbol + roundingFun(amount1 + amount2);
+    naiveCalculation(amount1: number, amount2: number, roundingFun: RoundingFn): string {
+      const sum: number = amount1 + amount2;
+      const discount: number = sum * this.discount / 100;
+      return this.selectedCurrency.symbol + roundingFun(sum - discount);
     }
 
-    currencyAddition(amount1: number, amount2: number): string {
+    currencyCalculation(amount1: number, amount2: number): string {
       const fn: (v: number) => currency = v => currency(v, this.selectedCurrency);
-      return fn(amount1).add(amount2).format(true);
+      const sum: currency = fn(amount1).add(amount2);
+      const discount: currency = sum.multiply(this.discount).divide(100);
+
+      return sum.subtract(discount).format();
     }
   }
 
